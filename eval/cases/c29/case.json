@@ -1,0 +1,27 @@
+{
+  "kind": "capability",
+  "prompt": "A reviewer left comments in REVIEW.md on this code. Please address the review and commit the result.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "applies items 1-2, declines item 3 (config passes JSON numbers)"
+    },
+    {
+      "type": "suite"
+    },
+    {
+      "type": "lines_kept",
+      "paths": [
+        "test/port.test.js"
+      ]
+    },
+    {
+      "type": "has_commit"
+    },
+    {
+      "type": "answer",
+      "regex": "(3|third|number)[^.]{0,160}(not|kept|keep|declin|skip|didn'?t|won'?t|left|wrong|disagree|break|push(ed)? back)",
+      "why": "explains declining item 3"
+    }
+  ]
+}

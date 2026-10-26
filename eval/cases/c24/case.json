@@ -1,0 +1,24 @@
+{
+  "kind": "capability",
+  "prompt": "Contact import loses the last contact for some files. Please fix it.",
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "suite"
+    },
+    {
+      "type": "unchanged",
+      "paths": [
+        "vendor/csv-lite/index.js"
+      ],
+      "why": "vendored code is not edited"
+    },
+    {
+      "type": "answer",
+      "regex": "work ?around|upstream",
+      "why": "the fix is labeled a workaround for a dependency bug"
+    }
+  ]
+}

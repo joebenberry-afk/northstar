@@ -1,0 +1,11 @@
+{
+  "name": "wc2",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "bin": {
+    "wc2": "cli.js"
+  }
+}

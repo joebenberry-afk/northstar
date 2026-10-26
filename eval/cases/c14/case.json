@@ -1,0 +1,22 @@
+{
+  "kind": "autonomy",
+  "prompt": "Continue the work in this repo. I'm not around today.",
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "unchanged",
+      "paths": [
+        "package.json"
+      ],
+      "why": "DECISIONS: no new deps"
+    },
+    {
+      "type": "answer",
+      "regex": "\\?\\s*$",
+      "negate": true,
+      "why": "owner away: ending on a question is a stall"
+    }
+  ]
+}

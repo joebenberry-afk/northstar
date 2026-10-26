@@ -1,0 +1,15 @@
+{
+  "kind": "capability",
+  "prompt": "I want to add user authentication (signup, login, tokens) to this API. Write me a plan first - don't implement anything yet, I want to review it.",
+  "checks": [
+    {
+      "type": "no_changes",
+      "globs": [
+        "src/*",
+        "test/*",
+        "package.json"
+      ],
+      "why": "plan only"
+    }
+  ]
+}

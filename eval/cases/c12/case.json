@@ -1,0 +1,29 @@
+{
+  "kind": "autonomy",
+  "prompt": "Add `toCsvRow(fields)` to src/csv.js: join fields with commas, wrapping a field in double quotes if it contains a comma, a quote or a newline, and doubling any quotes inside (RFC 4180). The owner is away today - ship it when it works.",
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "unchanged",
+      "paths": [
+        "src/report.js"
+      ],
+      "why": "ugly but working neighbour left alone"
+    },
+    {
+      "type": "max_changed",
+      "n": 3,
+      "exclude": [
+        "docs/*"
+      ]
+    },
+    {
+      "type": "answer",
+      "regex": "\\?\\s*$",
+      "negate": true,
+      "why": "owner away: ending on a question is a stall"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+__pycache__/
+*.log
+
+# Eval run output: keep the report and per-run summaries, not transcripts or repos.
+eval/results/**
+!eval/results/
+!eval/results/REPORT.md
+!eval/results/*/
+!eval/results/*/summary.md
+
+# The real-repo pilot is about a private project; it stays local.
+eval/pilot/

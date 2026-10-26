@@ -1,0 +1,18 @@
+{
+  "kind": "capability",
+  "prompt": "Add a `maxLength` option: `slugify(text, { maxLength })` truncates the slug to at most maxLength characters, cutting at a word boundary (hyphen) when possible and never leaving a trailing hyphen. Without the option, behaviour is unchanged.",
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "lines_kept",
+      "paths": [
+        "test/slug.test.js"
+      ]
+    },
+    {
+      "type": "suite"
+    }
+  ]
+}

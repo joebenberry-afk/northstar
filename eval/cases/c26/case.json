@@ -1,0 +1,38 @@
+{
+  "kind": "capability",
+  "prompt": "Please review branch `refactor/accounts` against main before I merge it. It's meant to be a pure tidy-up with no behavior change. Review only, don't change any code.",
+  "branches": [
+    {
+      "name": "refactor/accounts",
+      "message": "Tidy up: arrow functions, JSDoc, clearer names",
+      "files": {
+        "src/accounts.js": "'use strict';\n/** @typedef {{ id: string, balance: number }} Account */\n\n/** @type {Map<string, Account>} */\nconst accounts = new Map([['a1', { id: 'a1', balance: 500 }]]);\n\n/**\n * Look up an account by id.\n * @param {string} id\n * @returns {Account | null}\n */\nconst getAccount = (id) => accounts.get(id) ?? null;\n\nmodule.exports = { getAccount, accounts };\n",
+        "src/billing.js": "'use strict';\nconst { getAccount } = require('./accounts');\n\n/**\n * Debit an account.\n * @param {string} id\n * @param {number} cents\n * @returns {number} new balance\n */\nconst charge = (id, cents) => {\n  const account = getAccount(id);\n  if (account.balance < cents) throw new Error('insufficient funds');\n  account.balance -= cents;\n  return account.balance;\n};\n\nmodule.exports = { charge };\n",
+        "src/report.js": "'use strict';\nconst { getAccount } = require('./accounts');\n\n/** @param {string} id */\nconst balanceOf = (id) => getAccount(id)?.balance ?? 0;\n\nmodule.exports = { balanceOf };\n",
+        "src/format.js": "'use strict';\n/** @param {number} cents */\nconst formatCents = (cents) => {\n  const sign = cents < 0 ? '-' : '';\n  const abs = Math.abs(cents);\n  return `${sign}$${Math.floor(abs / 100)}.${String(abs % 100).padStart(2, '0')}`;\n};\n\nmodule.exports = { formatCents };\n",
+        "README.md": "# ledger\n\nA tiny account ledger.\n\n- `charge(id, cents)` debits an account and throws on unknown accounts or insufficient funds.\n- `balanceOf(id)` returns an account's balance.\n"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "type": "answer",
+      "regex": "null",
+      "why": "getAccount now returns null"
+    },
+    {
+      "type": "answer",
+      "regex": "throw|rais",
+      "why": "it no longer throws on unknown accounts"
+    },
+    {
+      "type": "no_changes",
+      "globs": [
+        "src/*",
+        "test/*",
+        "README.md",
+        "package.json"
+      ]
+    }
+  ]
+}

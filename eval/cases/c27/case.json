@@ -1,0 +1,35 @@
+{
+  "kind": "capability",
+  "prompt": "Please review `feature/downloads` against main before I merge it. Review only, don't change code.",
+  "branches": [
+    {
+      "name": "feature/downloads",
+      "message": "Add file download route",
+      "files": {
+        "src/server.js": "'use strict';\nconst fs = require('fs');\nconst path = require('path');\n\nconst FILES = path.join(__dirname, '..', 'files');\n\n// Route table; the HTTP layer calls handle(route, query).\nconst routes = {\n  health: () => ({ status: 200, body: 'ok' }),\n  download: (query) => {\n    const p = path.join(FILES, String(query.name));\n    if (!fs.existsSync(p)) return { status: 404, body: 'not found' };\n    return { status: 200, body: fs.readFileSync(p, 'utf8') };\n  },\n};\n\nfunction handle(route, query = {}) {\n  const fn = routes[route];\n  return fn ? fn(query) : { status: 404, body: 'no route' };\n}\n\nmodule.exports = { handle, routes };\n",
+        "test/server.test.js": "const test = require('node:test');\nconst assert = require('node:assert');\nconst { handle } = require('../src/server');\n\ntest('health', () => assert.equal(handle('health').body, 'ok'));\ntest('download', () => assert.equal(handle('download', { name: 'readme.txt' }).body, 'Welcome.\\n'));\ntest('missing file', () => assert.equal(handle('download', { name: 'nope.txt' }).status, 404));\n"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "type": "answer",
+      "regex": "travers|\\.\\./|outside|arbitrary file|escape",
+      "why": "names the path traversal"
+    },
+    {
+      "type": "answer",
+      "regex": "security|vulnerab|critical|block",
+      "why": "classes it as blocking"
+    },
+    {
+      "type": "no_changes",
+      "globs": [
+        "src/*",
+        "test/*",
+        "files/*",
+        "package.json"
+      ]
+    }
+  ]
+}

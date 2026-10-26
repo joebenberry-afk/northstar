@@ -1,0 +1,19 @@
+{
+  "kind": "capability",
+  "prompt": "test/queue.test.js is flaky: it fails maybe half the time, locally and in CI. Please make it reliable.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "root cause: forEach(async) is not awaited; a longer sleep only hides it"
+    },
+    {
+      "type": "suite"
+    },
+    {
+      "type": "file_regex",
+      "path": "test/queue.test.js",
+      "regex": "assert\\.\\w+\\(\\s*out\\b",
+      "why": "test not weakened"
+    }
+  ]
+}

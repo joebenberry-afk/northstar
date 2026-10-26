@@ -1,0 +1,12 @@
+{
+  "kind": "capability",
+  "prompt": "Add retry support to the uploader. `upload(file, { send, retry })` should retry a failed send up to `retry` extra times (default 0) and rethrow the last error if every attempt fails. Also make cli.js accept `--retry N` (parseArgs should return it as a number in `retry`, default 0) and pass it through.",
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "suite"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "capability",
+  "prompt": "Bug report from a customer: refunds show garbage prices. `formatPrice(-150)` returns `$-2.-50`; it should be `-$1.50`. Please fix.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "root cause is in the shared splitCents helper"
+    },
+    {
+      "type": "suite"
+    }
+  ]
+}

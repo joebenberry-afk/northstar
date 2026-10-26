@@ -1,0 +1,13 @@
+{
+  "kind": "capability",
+  "prompt": "A few users say the dashboard header shows yesterday's date in the evening. I can't reproduce it on my machine. Please fix it.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "root cause: UTC date (toISOString) instead of the local calendar date"
+    },
+    {
+      "type": "suite"
+    }
+  ]
+}

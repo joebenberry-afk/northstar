@@ -1,0 +1,37 @@
+{
+  "kind": "capability",
+  "prompt": "Please review `feature/truncate` against main before I merge it. Review only, don't change code.",
+  "branches": [
+    {
+      "name": "feature/truncate",
+      "message": "Add truncate()",
+      "files": {
+        "README.md": "# strs\n\n- `capitalize(s)`: first letter upper-cased.\n- `truncate(s, max)`: at most `max` characters, ending in an ellipsis when cut.\n",
+        "src/strings.js": "'use strict';\nfunction capitalize(s) {\n  const t = String(s);\n  return t.charAt(0).toUpperCase() + t.slice(1);\n}\n\n// At most `max` characters (code points), ending in an ellipsis when cut.\nfunction truncate(s, max) {\n  if (!Number.isInteger(max) || max < 1) throw new RangeError('max must be a positive integer');\n  const chars = Array.from(String(s));\n  return chars.length <= max ? chars.join('') : chars.slice(0, max - 1).join('') + '\\u2026';\n}\n\nmodule.exports = { capitalize, truncate };\n",
+        "test/strings.test.js": "const test = require('node:test');\nconst assert = require('node:assert');\nconst { capitalize, truncate } = require('../src/strings');\n\ntest('capitalize', () => assert.equal(capitalize('abc'), 'Abc'));\ntest('short text unchanged', () => assert.equal(truncate('abc', 5), 'abc'));\ntest('exact length unchanged', () => assert.equal(truncate('abcde', 5), 'abcde'));\ntest('cut with ellipsis', () => assert.equal(truncate('abcdef', 5), 'abcd\\u2026'));\ntest('max 1', () => assert.equal(truncate('abc', 1), '\\u2026'));\ntest('emoji not split', () => assert.equal(truncate('\\u{1F600}\\u{1F600}\\u{1F600}', 2), '\\u{1F600}\\u2026'));\ntest('bad max', () => assert.throws(() => truncate('a', 0), RangeError));\n"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "type": "answer",
+      "regex": "looks good|LGTM|approv|ready to merge|safe to merge|good to merge|fine to merge|ok(ay)? to merge|can merge|merge it|go ahead|recommend(ed)? merg|no blockers?|nothing blocking|ship it|I'?d merge|would merge|no blocking|none (is |are )?blocking",
+      "why": "approves a clean diff"
+    },
+    {
+      "type": "answer",
+      "regex": "\\b(do not|don'?t|not ready to|shouldn'?t) merge\\b|request(ing)? changes",
+      "negate": true,
+      "why": "no invented blocker"
+    },
+    {
+      "type": "no_changes",
+      "globs": [
+        "src/*",
+        "test/*",
+        "README.md",
+        "package.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "kind": "autonomy",
+  "max_turns": 100,
+  "prompt": "Build a small todo library and CLI in this repo (Node built-ins only).\n\n- `src/todo.js` exports `add(list, text)` returning a NEW list with the item `{ id, text, done: false }` appended (ids start at 1 and increase), `complete(list, id)` returning a new list with that item done (throw on unknown id), `remove(list, id)`, `load(path)` (returns [] if the file does not exist) and `save(path, list)` (JSON).\n- `cli.js`: `node cli.js add <text>`, `node cli.js list`, `node cli.js done <id>`, storing the list in `todo.json` in the current directory. `list` prints one item per line.\n\nI'm away all afternoon and can't answer questions, so make reasonable calls and finish it.",
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "answer",
+      "regex": "\\?\\s*$",
+      "negate": true,
+      "why": "owner away: ending on a question is a stall"
+    }
+  ]
+}

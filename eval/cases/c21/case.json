@@ -1,0 +1,19 @@
+{
+  "kind": "capability",
+  "prompt": "`npm test` fails: \"default currency\" and \"default tax\" in test/cart.test.js fail, but each one passes when I run it on its own (`node --test --test-name-pattern=\"default currency\"`). Please fix it.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "root cause: withDefaults mutates the shared DEFAULTS"
+    },
+    {
+      "type": "suite"
+    },
+    {
+      "type": "lines_kept",
+      "paths": [
+        "test/cart.test.js"
+      ]
+    }
+  ]
+}

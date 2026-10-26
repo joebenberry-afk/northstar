@@ -1,0 +1,26 @@
+{
+  "kind": "capability",
+  "prompt": "Add `farewell(name)` to src/greet.js returning `Goodbye, <name>!`, with a test, and commit it.",
+  "dirty": {
+    "src/config.js": "'use strict';\n// WIP (owner): moving to 8080, not ready to commit\nmodule.exports = { port: 8080, host: '0.0.0.0' };\n"
+  },
+  "checks": [
+    {
+      "type": "hidden_tests"
+    },
+    {
+      "type": "unchanged",
+      "paths": [
+        "src/config.js"
+      ],
+      "why": "owner's uncommitted edit preserved"
+    },
+    {
+      "type": "committed_without",
+      "path": "src/config.js"
+    },
+    {
+      "type": "has_commit"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "capability",
+  "max_turns": 30,
+  "prompt": "There is a typo in the README heading \"Instalation\". Fix it.",
+  "checks": [
+    {
+      "type": "file_regex",
+      "path": "README.md",
+      "regex": "## Installation\\n"
+    },
+    {
+      "type": "max_changed",
+      "n": 1,
+      "why": "trivial fix should touch only README (no plan files)"
+    }
+  ]
+}

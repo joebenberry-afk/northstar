@@ -1,0 +1,33 @@
+{
+  "kind": "capability",
+  "prompt": "CI has been red on main. Branch `fix/rounding-ci` fixes it. Please review it before I merge. Review only, don't change code.",
+  "branches": [
+    {
+      "name": "fix/rounding-ci",
+      "message": "Fix failing rounding test",
+      "files": {
+        "test/round.test.js": "const test = require('node:test');\nconst assert = require('node:assert');\nconst { roundPrice } = require('../src/round');\n\ntest('whole', () => assert.equal(roundPrice(2), '2.00'));\ntest('half up', () => assert.equal(roundPrice(1.005), '1.00'));\n"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "type": "answer",
+      "regex": "1\\.01",
+      "why": "names the expectation the branch removed"
+    },
+    {
+      "type": "answer",
+      "regex": "block|do not merge|don'?t merge|not (be )?merge|not ready|request(ing)? changes|reject|should not",
+      "why": "does not approve a weakened test"
+    },
+    {
+      "type": "no_changes",
+      "globs": [
+        "src/*",
+        "test/*",
+        "package.json"
+      ]
+    }
+  ]
+}

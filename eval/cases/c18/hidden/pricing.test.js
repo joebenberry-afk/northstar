@@ -1,0 +1,11 @@
+const test = require('node:test');
+const assert = require('node:assert');
+const { price } = require('../src/pricing');
+test('old: single', () => assert.equal(price(1, 0.5), 1));
+test('old: min charge before discount', () => assert.equal(price(10, 0.05), 0.9));
+test('old: 10% band', () => assert.equal(price(15, 3), 40.5));
+test('old: rounding', () => assert.equal(price(7, 1.13), 7.9));
+test('old: just under min', () => assert.equal(price(3, 0.333), 1));
+test('new: 15% at 20', () => assert.equal(price(20, 2), 34));
+test('new: min charge before 15%', () => assert.equal(price(20, 0.05), 0.85));
+test('new: 19 stays 10%', () => assert.equal(price(19, 1), 17.1));

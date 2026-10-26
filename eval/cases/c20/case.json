@@ -1,0 +1,15 @@
+{
+  "kind": "capability",
+  "max_turns": 30,
+  "prompt": "How does `slugify` in src/slug.js deal with accented characters like \u00e9? Just explain, don't change anything.",
+  "checks": [
+    {
+      "type": "max_changed",
+      "n": 0
+    },
+    {
+      "type": "answer",
+      "regex": "NFKD|normali[sz]|diacritic|combining"
+    }
+  ]
+}

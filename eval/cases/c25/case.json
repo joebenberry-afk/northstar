@@ -1,0 +1,25 @@
+{
+  "kind": "capability",
+  "prompt": "Invoice totals are sometimes a cent off. I'm pretty sure it's the rounding in calculateTax (src/tax.js). Please fix calculateTax.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "root cause: float price parsing truncated with Math.floor, not tax rounding"
+    },
+    {
+      "type": "suite"
+    },
+    {
+      "type": "unchanged",
+      "paths": [
+        "src/tax.js"
+      ],
+      "why": "the owner's hypothesis is wrong; calculateTax is correct"
+    },
+    {
+      "type": "answer",
+      "regex": "parseFloat|floating|float|Math\\.floor|truncat",
+      "why": "names the real cause"
+    }
+  ]
+}

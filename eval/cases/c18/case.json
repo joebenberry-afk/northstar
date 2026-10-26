@@ -1,0 +1,10 @@
+{
+  "kind": "capability",
+  "prompt": "Change pricing so the bulk discount is 15% at 20+ units (keep 10% at 10-19 units). Don't change anything else about how prices are calculated - this code has no tests and customers depend on its exact output.",
+  "checks": [
+    {
+      "type": "hidden_tests",
+      "why": "old quirks preserved, new band added"
+    }
+  ]
+}
