@@ -65,7 +65,7 @@ Northstar: build · Project +critical
 Rigor follows risk, not file count. Quick work skips all the ceremony: do it, check it, report the evidence.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Request] --> B["Size it<br/>intent · tier · modifiers"]
     B --> C{Tier}
     C -->|Quick| D[Do it → run check → report evidence]
