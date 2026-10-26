@@ -147,3 +147,7 @@ python -I make_cases.py                                  # regenerate cases/
 python -I run.py --tag mytag --arms ns --trials 1        # Northstar only
 python -I run.py --tag mytag --cases c25 --trials 4      # both arms, one case
 ```
+
+## License
+
+[MIT](LICENSE)
